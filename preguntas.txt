@@ -31,6 +31,9 @@ Farmacia
 registrada y anulada/ BN_NC nose sabe que es.
 ¿Explicar cada opcion de pestaña Farmacia?
 
+¿que sirve de compras (ingreso de suministros)?
+¿la presentacion del insumo es manualmente digitada o es de seleccion?
+¿que laboratorio necesita ver?
 
 
 
