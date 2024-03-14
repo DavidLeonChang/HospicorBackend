@@ -1,18 +1,35 @@
 ¿El kardex de farmacia el igual al kardex de los licenciados?
-¿Pueden ver el inventario completo?¿los insumos tienen un codigo en especifico?
+no, el kardex es contable consumos de todos los insumos
+¿Pueden ver el inventario completo? 
+si 
+¿los insumos tienen un codigo en especifico? 
+no
 ¿La modificacion es 1 a 1?
+si
 ¿necesita existir el item en bodega antes de un ingreso por compra?
+si
 ¿Explicar el tema de las regulaciones?
+sirve para ajustar el inventario cuando se agregan o disminuyen insumos y no pueden ser ingresados mediante una 
+compra(factura)
 ¿Diferencia entre despacho y consumo interno?
+despacho se necesita usar un insumo en el paciente/ consumo interno es cuando el insumo no es cobrado al paciente 
+(cortesia de la clinica), los 2 son por motivos de cuadre de inventario disminucion de inventario 
 ¿Quien fija los valores de venta de los insumos medicos?
-
+el precio de venta al publico lo fija 6to piso, mientras que el precio de venta privado se utiliza una formula 
+(10-15% del valor de compra, mientras no exceda el precio techo)
 ¿Para que sirve ACT, IVA y CNMB?	cuadro nacional de medico basicos
-¿Explicar cada opcion de pestaña Farmacia?
+ACT de activo, IVA si graba iva, CNMB si pertenece al cuadro nacional de medicamentos basicos
 ¿ingesta, issfa innova?
+ingesta es para saber si es de consumo oral, issfa e innova son seguro que no se usan
 ¿c Debito, C credito, c Costo?
+son cuentas de debito, credito y costo, cuando se genere notas de credito.
 ¿Codificacion Internacional?
+solo nececito saber el codigo y el sistema me trae la informacion.
 ¿Quien solicita el restock de insumos medicos?
+Farmacia
 ¿con respecto a proveedores cuantos estado existen y que es BN_NC?
+registrada y anulada/ BN_NC nose sabe que es.
+¿Explicar cada opcion de pestaña Farmacia?
 
 
 
