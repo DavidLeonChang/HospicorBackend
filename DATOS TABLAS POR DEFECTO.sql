@@ -1,19 +1,3 @@
-CREATE TABLE CARGO(
-    id SERIAL PRIMARY KEY,
-    nombre varchar(40)
-);
-
-CREATE TABLE SERVICIO(
-    id SERIAL PRIMARY KEY,
-    nombre varchar(40)
-);
-
-CREATE TABLE GENEROS(
-    id serial PRIMARY KEY,
-    descripcion VARCHAR(20)
-);
-
-
 INSERT INTO CARGO(nombre) VALUES
     ('ADMINISTRADOR'),
     ('LICENCIADO(A) DE ENFERMERÍA'),
@@ -85,3 +69,80 @@ INSERT INTO SERVICIO(nombre) VALUES
 INSERT INTO GENEROS(descripcion) VALUES
     ('FEMENINO'),
     ('MASCULINO');    
+
+CREATE TABLE BODEGA(
+    id serial PRIMARY KEY,
+    nombre VARCHAR(20)
+);
+CREATE TABLE CATEGORIA_INVETARIO(
+    id serial PRIMARY KEY,
+    nombre VARCHAR(25),
+    abreviatura VARCHAR(3)
+);
+CREATE TABLE TIPO(
+    id serial PRIMARY KEY,
+    descripcion VARCHAR(15)
+);
+
+CREATE TABLE TIPODIETA(
+    id serial PRIMARY KEY,
+    descripcion VARCHAR(100)
+);
+
+CREATE TABLE HABITACION(
+    id serial PRIMARY KEY,
+    nombre VARCHAR(20)
+);
+CREATE TABLE CAMA(
+    id serial PRIMARY KEY,
+    habitacionid serial,
+    pacienteid serial,
+    nombre VARCHAR(7),
+    estado boolean,
+    FOREIGN KEY(habitacionid) references HABITACION(id),
+    FOREIGN KEY(pacienteid) references PACIENTE(id),
+);
+
+CREATE TABLE SEGURO(
+    id serial PRIMARY KEY,
+    nombre varchar(15)
+);
+CREATE TABLE ACUERDO(
+    id serial PRIMARY KEY,
+    acuerdo varchar(50),
+    seguroid serial,
+    FOREIGN KEY(seguroid) references SEGURO(id)
+);
+
+CREATE TABLE ZONA(
+    id serial PRIMARY KEY, 
+    zona varchar(20)
+);
+
+CREATE TABLE TIPOAFILIADO(
+    id serial PRIMARY KEY,
+    tipo varchar(20),
+    seguroid serial,
+    OREIGN KEY(seguroid) references SEGURO(id)
+);
+
+CREATE TABLE TIPOIDENTIFICACION(
+    id serial PRIMARY KEY,
+    tipo varchar(10),
+    regla integer
+);
+
+CREATE TABLE ESTADOCIVIL(
+    id serial PRIMARY KEY,
+    estado varchar(15)
+);
+
+CREATE TABLE ETNIA(
+    id serial PRIMARY KEY,
+    nombre varchar(25),
+);
+
+CREATE TABLE INSTRUCCION(
+    id serial PRIMARY KEY,
+    nombre varchar(15)
+);
