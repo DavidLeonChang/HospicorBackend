@@ -13,7 +13,8 @@ create table ROLES_USUARIOS(
 
 CREATE TABLE USUARIOS(
     id SERIAL PRIMARY KEY,
-    CEDULA VARCHAR(11),
+    nombreusuario VARCHAR(15),
+    cedula VARCHAR(11),
     contrasena VARCHAR(30),
     nombre1 VARCHAR(15),
     nombre2 VARCHAR(15),
