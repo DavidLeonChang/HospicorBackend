@@ -4,12 +4,78 @@
 
 CREATE DATABASE HOSPICOR;
 
+/** Tablas que pueden aumentar en el futuro y rellenan cajas de seleccion **/
+/** Inicio **/
+
+CREATE TABLE CARGO(
+    id SERIAL PRIMARY KEY,
+    nombre varchar(40)
+);/** Rol de una persona de la clinica/hospital **/
+
+CREATE TABLE SERVICIO(
+    id SERIAL PRIMARY KEY,
+    nombre varchar(40)
+);/** Especialidad de un doctor o trabajo asignado **/
+
+CREATE TABLE GENEROS(
+    id serial PRIMARY KEY,
+    descripcion VARCHAR(20)
+);/** Genero de los usuarios **/
+
+CREATE TABLE TIPOIDENTIFICACION(
+    id serial PRIMARY KEY,
+    tipo varchar(10),
+    regla integer
+);/** Metodo de identificacion **/
+
+CREATE TABLE ESTADOCIVIL(
+    id serial PRIMARY KEY,
+    estado varchar(15)
+);/** Estado civil del paciente **/
+
+CREATE TABLE ETNIA(
+    id serial PRIMARY KEY,
+    nombre varchar(25),
+);/** Etnia del paciente **/
+
+CREATE TABLE INSTRUCCION(
+    id serial PRIMARY KEY,
+    nombre varchar(15)
+);/** Nivel academico del paciente **/
+
+CREATE TABLE SEGURO(
+    id serial PRIMARY KEY,
+    nombre varchar(15)
+);/** Nombre del seguro del paciente **/
+
+CREATE TABLE ACUERDO(
+    id serial PRIMARY KEY,
+    acuerdo varchar(50),
+    seguroid serial,
+    FOREIGN KEY(seguroid) references SEGURO(id)
+);/** Tipo de acuerdo del seguro **/
+
+CREATE TABLE ZONA(
+    id serial PRIMARY KEY, 
+    zona varchar(20)
+);/** Tipo de zona de la vivienda del paciente **/
+
+CREATE TABLE TIPOAFILIADO(
+    id serial PRIMARY KEY,
+    tipo varchar(20),
+    seguroid serial,
+    OREIGN KEY(seguroid) references SEGURO(id)
+);/** Tipo de afiliacion del paciente al seguro **/
+
+/** Usuarios que intervienen en el sistema **/
+/** Inicio **/
+
 create table ROLES_USUARIOS(
     id SERIAL PRIMARY KEY,
     nombre varchar(20),
     diasedicion integer,
     estado boolean
-);
+);/** Privilegios de tiempo en edicion en el sistema segun el tipo de usuario **/
 
 CREATE TABLE USUARIOS(
     id SERIAL PRIMARY KEY,
@@ -29,67 +95,7 @@ CREATE TABLE USUARIOS(
     FOREIGN KEY(generoid) references GENEROS(id),
     FOREIGN KEY(cargoid) references CARGO(id),
     FOREIGN KEY(servicioid) references SERVICIO(id)
-);
-
-CREATE TABLE CARGO(
-    id SERIAL PRIMARY KEY,
-    nombre varchar(40)
-);
-
-CREATE TABLE SERVICIO(
-    id SERIAL PRIMARY KEY,
-    nombre varchar(40)
-);
-
-CREATE TABLE GENEROS(
-    id serial PRIMARY KEY,
-    descripcion VARCHAR(20)
-);
-
-CREATE TABLE TIPOIDENTIFICACION(
-    id serial PRIMARY KEY,
-    tipo varchar(10),
-    regla integer
-);
-
-CREATE TABLE ESTADOCIVIL(
-    id serial PRIMARY KEY,
-    estado varchar(15)
-);
-
-CREATE TABLE ETNIA(
-    id serial PRIMARY KEY,
-    nombre varchar(25),
-);
-
-CREATE TABLE INSTRUCCION(
-    id serial PRIMARY KEY,
-    nombre varchar(15)
-);
-
-CREATE TABLE SEGURO(
-    id serial PRIMARY KEY,
-    nombre varchar(15)
-);
-
-CREATE TABLE ACUERDO(
-    id serial PRIMARY KEY,
-    acuerdo varchar(50),
-    seguroid serial,
-    FOREIGN KEY(seguroid) references SEGURO(id)
-);
-
-CREATE TABLE ZONA(
-    id serial PRIMARY KEY, 
-    zona varchar(20)
-);
-
-CREATE TABLE TIPOAFILIADO(
-    id serial PRIMARY KEY,
-    tipo varchar(20),
-    seguroid serial,
-    OREIGN KEY(seguroid) references SEGURO(id)
-);
+); /** Usuarios del sistema **/
 
 CREATE TABLE PACIENTE(
     id serial PRIMARY KEY,
@@ -132,50 +138,18 @@ CREATE TABLE PACIENTE(
     FOREIGN KEY(tipoafiliadoid) references TIPOAFILIADO(id),
     FOREIGN KEY(zonaid) references ZONA(id),
     FOREIGN KEY(acuerdoid) references ACUERDO(id)
-);
+); /** Paciente del sistema **/
 
-CREATE TABLE HABITACION(
-    id serial PRIMARY KEY,
-    nombre VARCHAR(20)
-);
+/** Fin **/
 
-CREATE TABLE CAMA(
-    id serial PRIMARY KEY,
-    habitacionid serial,
-    pacienteid serial,
-    nombre VARCHAR(7),
-    estado boolean,
-    FOREIGN KEY(habitacionid) references HABITACION(id),
-    FOREIGN KEY(pacienteid) references PACIENTE(id),
-);
-
-CREATE TABLE TIPO(
-    id serial PRIMARY KEY,
-    descripcion VARCHAR(15)
-);
-
-CREATE TABLE TIPODIETA(
-    id serial PRIMARY KEY,
-    descripcion VARCHAR(100)
-);
-
-CREATE TABLE NUTRICION(
-    id serial PRIMARY KEY,
-    camaid serial,
-    tipoid serial,
-    tipodietaid serial,
-    fecha date,
-    observacion text,
-    FOREIGN KEY(camaid) references CAMA(id),
-    FOREIGN KEY(tipoid) references TIPO(id),
-    FOREIGN KEY(tipodietaid) references TIPODIETA(id)
-);
+/** Tablas necesarias para inventario **/
+/** Inicio **/
 
 CREATE TABLE CATEGORIA_INVETARIO(
     id serial PRIMARY KEY,
     nombre VARCHAR(25),
     abreviatura VARCHAR(3)
-);
+);/** Tipo de categoria de un item del sistema **/
 
 CREATE TABLE PROVEEDORES(
     id serial PRIMARY KEY,
@@ -188,13 +162,13 @@ CREATE TABLE PROVEEDORES(
     lote varchar(20),
     registrosanitario varchar(30),
     estado varchar(15),
-);
+);/** Proveedores de un item del sistema **/
 
 CREATE TABLE DESPACHO(
     id serial PRIMARY KEY,
     fichamedicaid serial,
     FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
-);
+);/** Lista de item a despachar **/
 
 CREATE TABLE DESPACHOITEM(
     id serial PRIMARY KEY,
@@ -203,7 +177,7 @@ CREATE TABLE DESPACHOITEM(
     cantidad integer,
     FOREIGN KEY(despachoid) references DESPACHO(id),
     FOREIGN KEY(itemid) references ITEM_INVENTARIO(id)
-);
+);/** Referencia de la lista de item a despachar **/
 
 CREATE TABLE ITEM_INVENTARIO(
     id serial PRIMARY KEY,
@@ -242,12 +216,12 @@ CREATE TABLE ITEM_INVENTARIO(
     provedorid serial,
     FOREIGN KEY(categoriaid) references CATEGORIA_INVETARIO(id),
     FOREIGN KEY(provedorid) references PROVEEDORES(id)
-);
+);/** Item del sistema **/
 
 CREATE TABLE BODEGA(
     id serial PRIMARY KEY,
     nombre VARCHAR(20)
-);
+);/** Lugar de almacenamiento del item del sistema **/
 
 CREATE TABLE ITEM_BODEGA(
     id serial PRIMARY KEY,
@@ -256,17 +230,72 @@ CREATE TABLE ITEM_BODEGA(
     cantidad integer,
     FOREIGN KEY(bodegaid) references BODEGA(id)
     FOREIGN KEY(itemid) references ITEM_INVENTARIO(id)
-);
+);/** Referencia de la cantidad de items que hay en una bodega especifica **/
 
-CREATE TABLE FORM(
-    id serial PRIMARY KEY,
-    pacienteid serial,
-    FOREIGN KEY(pacienteid) references PACIENTE(id)
-);
+/** Fin **/
+
+/** Proceso medico **/
+/** Inicio **/
 
 CREATE TABLE FICHA_MEDICA(
     id serial PRIMARY KEY,
     pacienteid serial,
-
+    fechaentrada date,
+    fechasalida date,
     FOREIGN KEY(pacienteid) references PACIENTE(id)
+);/** Toda actividad e insumos consumido durante el proceso medico **/
+
+    /** Formularios **/
+    /** Inicio **/
+
+CREATE TABLE FORM(
+    id serial PRIMARY KEY,
+    fichamedicaid serial,
+    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );
+
+    /** Fin **/
+
+    /** Tablas necesarias para Nutricion **/
+    /** Inicio **/
+
+CREATE TABLE HABITACION(
+    id serial PRIMARY KEY,
+    nombre VARCHAR(20)
+);/** Seccion de la clinica **/
+
+CREATE TABLE CAMA(
+    id serial PRIMARY KEY,
+    habitacionid serial,
+    fichamedicaid serial,
+    nombre VARCHAR(7),
+    estado boolean,
+    FOREIGN KEY(habitacionid) references HABITACION(id),
+    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id),
+);/** Espacio disponible para el paciente **/
+
+CREATE TABLE TIPO(
+    id serial PRIMARY KEY,
+    descripcion VARCHAR(15)
+);/** Nombre de la comida segun el momento del dia **/
+
+CREATE TABLE TIPODIETA(
+    id serial PRIMARY KEY,
+    descripcion VARCHAR(100)
+);/** Tipo de comida segun la dieta **/
+
+CREATE TABLE NUTRICION(
+    id serial PRIMARY KEY,
+    camaid serial,
+    tipoid serial,
+    tipodietaid serial,
+    fecha date,
+    observacion text,
+    FOREIGN KEY(camaid) references CAMA(id),
+    FOREIGN KEY(tipoid) references TIPO(id),
+    FOREIGN KEY(tipodietaid) references TIPODIETA(id)
+);/** Inicio **/
+
+    /** Fin **/
+
+/** Fin **/
