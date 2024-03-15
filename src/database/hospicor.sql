@@ -269,7 +269,7 @@ CREATE TABLE CAMA(
     id serial PRIMARY KEY,
     habitacionid serial,
     fichamedicaid serial,
-    nombre VARCHAR(7),
+    nombre VARCHAR(10),
     estado boolean,
     FOREIGN KEY(habitacionid) references HABITACION(id),
     FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id),
