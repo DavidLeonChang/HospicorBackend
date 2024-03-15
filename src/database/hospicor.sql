@@ -242,6 +242,7 @@ CREATE TABLE FICHA_MEDICA(
     pacienteid serial,
     fechaentrada date,
     fechasalida date,
+    antecedentes text,
     FOREIGN KEY(pacienteid) references PACIENTE(id)
 );/** Toda actividad e insumos consumido durante el proceso medico **/
 
