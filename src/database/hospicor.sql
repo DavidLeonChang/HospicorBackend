@@ -1,8 +1,8 @@
-
-
-
-
 CREATE DATABASE HOSPICOR;
+CREATE USER DLEONC WITH ENCRYPTED PASSWORD '0952866606';
+GRANT ALL PRIVILEGES ON DATABASE HOSPICOR TO DLEONC;
+/*CREATE USER LMERA WITH ENCRYPTED PASSWORD 'XXX';
+GRANT ALL PRIVILEGES ON DATABASE HOSPICOR TO LMERA;*/
 
 /** Tablas que pueden aumentar en el futuro y rellenan cajas de seleccion **/
 /** Inicio **/
@@ -269,7 +269,7 @@ CREATE TABLE CAMA(
     id serial PRIMARY KEY,
     habitacionid serial,
     fichamedicaid serial,
-    nombre VARCHAR(7),
+    nombre VARCHAR(10),
     estado boolean,
     FOREIGN KEY(habitacionid) references HABITACION(id),
     FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id),
