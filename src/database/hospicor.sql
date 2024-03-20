@@ -239,22 +239,112 @@ CREATE TABLE ITEM_BODEGA(
 
 CREATE TABLE FICHA_MEDICA(
     id serial PRIMARY KEY,
+    datosestablecimientoid serial,
+    eventoingresoid serial
     pacienteid serial,
     fechaentrada date,
     fechasalida date,
-    antecedentes text,
+    antecedentes text,    
+    FOREIGN KEY(datosestablecimientoid) references DATOSESTABLECIMIENTO(id),
+    FOREIGN KEY(eventoingresoid) references EVENTOINGRESO(id)
     FOREIGN KEY(pacienteid) references PACIENTE(id)
 );/** Toda actividad e insumos consumido durante el proceso medico **/
 
-    /** Formularios **/
+    /** TABLAS ADICIONALES DE INFORMACION DEL PACIENTE Y FORMULARIOS */
     /** Inicio **/
 
-CREATE TABLE FORM(
+CREATE TABLE CIE10(
+    id varchar(6) PRIMARY KEY,
+    nombre text
+);
+
+CREATE TABLE DATOSESTABLECIMIENTO(
     id serial PRIMARY KEY,
-    fichamedicaid serial,
+    instituciondelsistema varchar(20),
+    unicodigo varchar(15),
+    establecimientodesalud varchar(20),
+    tipologia varchar(30)
+);
+
+/** FORM003 ANE **/
+/** INICIO **/
+
+CREATE TABLE EVENTOINGRESO(
+    id serial PRIMARY KEY,
+    fecha date,
+    condiciondellegada varchar(30),
+    motivo varchar(30)
+);
+
+/** FIN **/
+
+/** FORM005 EVOLUCIONES **/
+/** INICIO **/
+
+CREATE TABLE EVOLUCIONES(
+    id serial PRIMARY KEY,
+    fichamedicaid serial
+    fechainicio date,
+    fechafinal date,
+    evoluciontexto text,
     FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );
 
+/** FIN **/
+
+/** FORM007 INTERCONSULTA **/
+/** INICIO **/
+CREATE TABLE DIAGNOSTICOCIE10SOLICITUD(
+    id serial PRIMARY KEY,
+    cie10id varchar(6),
+    solicitudid serial,
+    FOREIGN KEY(solicitudid) references SOLICITUD(id)
+);
+CREATE TABLE DIAGNOSTICOCIE10INFORME(
+    id serial PRIMARY KEY,
+    cie10id varchar(6),
+    interconsultaid serial,
+    FOREIGN KEY(interconsultaid) references INTERCONSULTA(id)
+);
+CREATE TABLE SOLICITUD(
+    id Serial PRIMARY KEY,
+    fichamedicaid serial,
+    motivo text,
+    cuadroclinico text,
+    resultadoexamenes text,
+    planterapeutico text,
+    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
+);
+CREATE TABLE INTERCONSULTA(    
+    id serial PRIMARY KEY,
+    fecha date,
+    duracion integer,
+    cuadroclinico text,
+    resumencclinico text,
+    planpropuesto text,
+    planterapeuticopropuesto text
+);
+
+/** FIN **/
+
+/** FORM053 REFERENCIA Y CONTRAREFERENCIA **/
+/** INICIO **/
+CREATE TABLE DIAGNOSTICOCIE10RCR(
+    id serial PRIMARY KEY,
+    cie10id varchar(6),
+    deriba boolean,
+    rcrid serial,
+    FOREIGN KEY(rcrid) references REFERENCIACONTRAREFERENCIA(id)
+);
+
+CREATE TABLE REFERENCIACONTRAREFERENCIA(
+    id serial PRIMARY KEY,
+    motivo text,
+    establecimientoderiva varchar(50),
+    resumencclinicoderiva text,
+    hallazgosderiba TEXT,
+    
+);
     /** Fin **/
 
     /** Tablas necesarias para Nutricion **/
@@ -272,7 +362,7 @@ CREATE TABLE CAMA(
     nombre VARCHAR(10),
     estado boolean,
     FOREIGN KEY(habitacionid) references HABITACION(id),
-    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id),
+    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );/** Espacio disponible para el paciente **/
 
 CREATE TABLE TIPO(
