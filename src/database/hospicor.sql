@@ -7,6 +7,14 @@ GRANT ALL PRIVILEGES ON DATABASE HOSPICOR TO LMERA;*/
 /** Tablas que pueden aumentar en el futuro y rellenan cajas de seleccion **/
 /** Inicio **/
 
+CREATE TABLE DATOSESTABLECIMIENTO(
+    id serial PRIMARY KEY,
+    instituciondelsistema varchar(20),
+    unicodigo varchar(15),
+    establecimientodesalud varchar(20),
+    tipologia varchar(30)
+);
+
 CREATE TABLE CARGO(
     id SERIAL PRIMARY KEY,
     nombre varchar(40)
@@ -20,7 +28,37 @@ CREATE TABLE SERVICIO(
 CREATE TABLE GENEROS(
     id serial PRIMARY KEY,
     descripcion VARCHAR(20)
-);/** Genero de los usuarios **/
+);/** Genero de los usuarios y pacientes **/
+
+/** Usuarios que intervienen en el sistema **/
+/** Inicio **/
+
+create table ROLES_USUARIOS(
+    id SERIAL PRIMARY KEY,
+    nombre varchar(20),
+    diasedicion integer,
+    estado boolean
+);/** Privilegios de tiempo en edicion en el sistema segun el tipo de usuario **/
+
+CREATE TABLE USUARIOS(
+    id SERIAL PRIMARY KEY,
+    nombreusuario VARCHAR(15),
+    cedula VARCHAR(11),
+    contrasena VARCHAR(30),
+    nombre1 VARCHAR(15),
+    nombre2 VARCHAR(15),
+    apellido1 VARCHAR(15),
+    apellido2 VARCHAR(15),
+    tipousuario Serial,
+    generoid serial,
+    cargoid serial,
+    servicioid serial,
+    estado boolean,
+    FOREIGN KEY(tipousuario) references ROLES_USUARIOS(id),
+    FOREIGN KEY(generoid) references GENEROS(id),
+    FOREIGN KEY(cargoid) references CARGO(id),
+    FOREIGN KEY(servicioid) references SERVICIO(id)
+); /** Usuarios del sistema **/
 
 CREATE TABLE TIPOIDENTIFICACION(
     id serial PRIMARY KEY,
@@ -67,44 +105,13 @@ CREATE TABLE TIPOAFILIADO(
     OREIGN KEY(seguroid) references SEGURO(id)
 );/** Tipo de afiliacion del paciente al seguro **/
 
-/** Usuarios que intervienen en el sistema **/
-/** Inicio **/
-
-create table ROLES_USUARIOS(
-    id SERIAL PRIMARY KEY,
-    nombre varchar(20),
-    diasedicion integer,
-    estado boolean
-);/** Privilegios de tiempo en edicion en el sistema segun el tipo de usuario **/
-
-CREATE TABLE USUARIOS(
-    id SERIAL PRIMARY KEY,
-    nombreusuario VARCHAR(15),
-    cedula VARCHAR(11),
-    contrasena VARCHAR(30),
-    nombre1 VARCHAR(15),
-    nombre2 VARCHAR(15),
-    apellido1 VARCHAR(15),
-    apellido2 VARCHAR(15),
-    tipousuario Serial,
-    generoid serial,
-    cargoid serial,
-    servicioid serial,
-    estado boolean,
-    FOREIGN KEY(tipousuario) references ROLES_USUARIOS(id),
-    FOREIGN KEY(generoid) references GENEROS(id),
-    FOREIGN KEY(cargoid) references CARGO(id),
-    FOREIGN KEY(servicioid) references SERVICIO(id)
-); /** Usuarios del sistema **/
-
 CREATE TABLE PACIENTE(
-    id serial PRIMARY KEY,
+    tipoidentificacionid serial,
+    identificacion varchar(15) PRIMARY KEY,
     nombre varchar(15),
     nombre2 varchar(15),
     apellido varchar(15),
-    apellido2 varchar(15),
-    tipoidentificacionid serial,
-    identificacion varchar(15),
+    apellido2 varchar(15),    
     edad integer,
     generoid serial,
     fechaNacimiento date,
@@ -241,7 +248,7 @@ CREATE TABLE FICHA_MEDICA(
     id serial PRIMARY KEY,
     datosestablecimientoid serial,
     eventoingresoid serial
-    pacienteid serial,
+    pacienteid varchar(15),
     fechaentrada date,
     fechasalida date,
     antecedentes text,    
@@ -258,13 +265,15 @@ CREATE TABLE CIE10(
     nombre text
 );
 
-CREATE TABLE DATOSESTABLECIMIENTO(
+CREATE TABLE DIAGNOSTICOCIE10(
     id serial PRIMARY KEY,
-    instituciondelsistema varchar(20),
-    unicodigo varchar(15),
-    establecimientodesalud varchar(20),
-    tipologia varchar(30)
+    fichamedicaid serial,
+    tipo integer,
+    estado boolean,
+    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );
+
+
 
 /** FORM003 ANE **/
 /** INICIO **/
@@ -283,29 +292,53 @@ CREATE TABLE EVENTOINGRESO(
 
 CREATE TABLE EVOLUCIONES(
     id serial PRIMARY KEY,
-    fichamedicaid serial
+    fichamedicaid serial,
     fechainicio date,
     fechafinal date,
     evoluciontexto text,
     FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );
+CREATE TABLE PLANEVOLUCION(
+
+);
 
 /** FIN **/
 
+
+
+    /** FORM006 REFERENCIA Y CONTRAREFERENCIA **/
+    /** INICIO **/
+    /** 06 EPICRICIS **/
+
+
+CREATE TABLE EPICRISIS(
+    id serial PRIMARY KEY,
+    resumencclinico text,
+    resumenevolucion text,
+    hallazgos text,
+    resumentratamiente text,
+    indicacionesalta text,
+    causaexterna text,
+    estadoegreso boolean,
+    condicionalta boolean,
+    asintomatico boolean,
+    discapacidad boolean,
+    retironoautorizado boolean,
+    defuncionmenos48h boolean,
+    diasestada integer,
+    diasreposo integer,
+    elaboradopor varchar(40),
+    fechaepi date,
+    userid serial,
+    fichamedicaid serial,
+    FOREIGN KEY(userid) references USUARIOS(id),
+    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
+);
+
 /** FORM007 INTERCONSULTA **/
 /** INICIO **/
-CREATE TABLE DIAGNOSTICOCIE10SOLICITUD(
-    id serial PRIMARY KEY,
-    cie10id varchar(6),
-    solicitudid serial,
-    FOREIGN KEY(solicitudid) references SOLICITUD(id)
-);
-CREATE TABLE DIAGNOSTICOCIE10INFORME(
-    id serial PRIMARY KEY,
-    cie10id varchar(6),
-    interconsultaid serial,
-    FOREIGN KEY(interconsultaid) references INTERCONSULTA(id)
-);
+/** 07 INTERCONSULTASOLICITUD 09 INTERCONSULTAINFORME **/
+
 CREATE TABLE SOLICITUD(
     id Serial PRIMARY KEY,
     fichamedicaid serial,
@@ -317,25 +350,47 @@ CREATE TABLE SOLICITUD(
 );
 CREATE TABLE INTERCONSULTA(    
     id serial PRIMARY KEY,
+    fichamedicaid serial,
     fecha date,
     duracion integer,
     cuadroclinico text,
     resumencclinico text,
     planpropuesto text,
-    planterapeuticopropuesto text
+    planterapeuticopropuesto text,
+    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );
 
 /** FIN **/
 
+/** FORM008 EMERGENCIA **/
+/** INICIO **/
+
+
+/** FIN **/
+    
+
+    /** FORM010 EXAMENES LABORATORIO **/
+    /** INICIO **/
+CREATE TABLE EXAMENLAB(
+    id integer PRIMARY KEY,
+    nombre varchar(100),
+    categoria varchar(30)    
+);
+
+
+
+CREATE TABLE LABORATORIO(
+    id serial PRIMARY KEY,
+
+);
+
+
+
+    /** FIN **/
+
 /** FORM053 REFERENCIA Y CONTRAREFERENCIA **/
 /** INICIO **/
-CREATE TABLE DIAGNOSTICOCIE10RCR(
-    id serial PRIMARY KEY,
-    cie10id varchar(6),
-    deriba boolean,
-    rcrid serial,
-    FOREIGN KEY(rcrid) references REFERENCIACONTRAREFERENCIA(id)
-);
+/** 52-REFERENCIA 53-CONTRAREFERENCIA  **/
 
 CREATE TABLE REFERENCIACONTRAREFERENCIA(
     id serial PRIMARY KEY,
@@ -343,9 +398,25 @@ CREATE TABLE REFERENCIACONTRAREFERENCIA(
     establecimientoderiva varchar(50),
     resumencclinicoderiva text,
     hallazgosderiba TEXT,
-    
+    referencia boolean,
+    derivacion boolean,
+    establecimientoid serial,
+    institureferencia varchar(30),
+    establereferencia varchar(30),
+    distritreferencia varchar(30),
+    fechareferencia date,
+    resumencclinicocontra text,
+    hallazgoscontra text,
+    tratamientocontra text,
+    tratamientorecomendado text,
+    fechainforme date,
+    userid serial,
+    fichamedicaid serial,
+    FOREIGN KEY(userid) references USUARIOS(id),
+    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );
     /** Fin **/
+
 
     /** Tablas necesarias para Nutricion **/
     /** Inicio **/
