@@ -12,22 +12,26 @@ CREATE TABLE DATOSESTABLECIMIENTO(
     instituciondelsistema varchar(20),
     unicodigo varchar(15),
     establecimientodesalud varchar(20),
-    tipologia varchar(30)
+    tipologia varchar(30),
+    estado boolean
 );
 
 CREATE TABLE CARGO(
     id SERIAL PRIMARY KEY,
-    nombre varchar(40)
+    nombre varchar(40),
+    estado boolean
 );/** Rol de una persona de la clinica/hospital **/
 
 CREATE TABLE SERVICIO(
     id SERIAL PRIMARY KEY,
-    nombre varchar(40)
+    nombre varchar(40),
+    estado boolean
 );/** Especialidad de un doctor o trabajo asignado **/
 
 CREATE TABLE GENEROS(
     id serial PRIMARY KEY,
-    descripcion VARCHAR(20)
+    descripcion VARCHAR(20),
+    estado boolean
 );/** Genero de los usuarios y pacientes **/
 
 /** Usuarios que intervienen en el sistema **/
@@ -63,45 +67,53 @@ CREATE TABLE USUARIOS(
 CREATE TABLE TIPOIDENTIFICACION(
     id serial PRIMARY KEY,
     tipo varchar(10),
-    regla integer
+    regla integer,
+    estado boolean
 );/** Metodo de identificacion **/
 
 CREATE TABLE ESTADOCIVIL(
     id serial PRIMARY KEY,
-    estado varchar(15)
+    nombre varchar(15),
+    estado boolean
 );/** Estado civil del paciente **/
 
 CREATE TABLE ETNIA(
     id serial PRIMARY KEY,
     nombre varchar(25),
+    estado boolean
 );/** Etnia del paciente **/
 
 CREATE TABLE INSTRUCCION(
     id serial PRIMARY KEY,
-    nombre varchar(15)
+    nombre varchar(15),
+    estado boolean
 );/** Nivel academico del paciente **/
 
 CREATE TABLE SEGURO(
     id serial PRIMARY KEY,
-    nombre varchar(15)
+    nombre varchar(15),
+    estado boolean
 );/** Nombre del seguro del paciente **/
 
 CREATE TABLE ACUERDO(
     id serial PRIMARY KEY,
     acuerdo varchar(50),
     seguroid serial,
+    estado boolean
     FOREIGN KEY(seguroid) references SEGURO(id)
 );/** Tipo de acuerdo del seguro **/
 
 CREATE TABLE ZONA(
     id serial PRIMARY KEY, 
-    zona varchar(20)
+    zona varchar(20),
+    estado boolean
 );/** Tipo de zona de la vivienda del paciente **/
 
 CREATE TABLE TIPOAFILIADO(
     id serial PRIMARY KEY,
     tipo varchar(20),
     seguroid serial,
+    estado boolean
     OREIGN KEY(seguroid) references SEGURO(id)
 );/** Tipo de afiliacion del paciente al seguro **/
 
