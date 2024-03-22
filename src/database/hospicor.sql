@@ -259,13 +259,11 @@ CREATE TABLE ITEM_BODEGA(
 CREATE TABLE FICHA_MEDICA(
     id serial PRIMARY KEY,
     datosestablecimientoid serial,
-    eventoingresoid serial
     pacienteid varchar(15),
     fechaentrada date,
     fechasalida date,
     antecedentes text,    
-    FOREIGN KEY(datosestablecimientoid) references DATOSESTABLECIMIENTO(id),
-    FOREIGN KEY(eventoingresoid) references EVENTOINGRESO(id)
+    FOREIGN KEY(datosestablecimientoid) references DATOSESTABLECIMIENTO(id),    
     FOREIGN KEY(pacienteid) references PACIENTE(id)
 );/** Toda actividad e insumos consumido durante el proceso medico **/
 
@@ -285,8 +283,6 @@ CREATE TABLE DIAGNOSTICOCIE10(
     FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );
 
-
-
 /** FORM003 ANE **/
 /** INICIO **/
 
@@ -295,6 +291,8 @@ CREATE TABLE EVENTOINGRESO(
     fecha date,
     condiciondellegada varchar(30),
     motivo varchar(30)
+    fichamedicaid serial,
+    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );
 
 /** FIN **/
