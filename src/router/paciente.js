@@ -1,64 +1,73 @@
-const { Router }=require('express');
-const router=Router();
+const { Router } = require('express');
+const router = Router();
 
 //TIPO DE IDENTIFICACION
-const { getTipoIdentidadAdmin,getTipoIdentidad, createTipoIdentidad, deleteTipoIdentidad } =require('../controllers/users.controller');
+const { getTipoIdentidadAdmin, getTipoIdentidad, createTipoIdentidadAdmin, deleteTipoIdentidadAdmin } = require('../controllers/paciente.controller');
 //ESTADO CIVIL
-const { getEstadoCivil, createEstadoCivil, deleteEstadoCivil } =require('../controllers/users.controller');
+const { getEstadoCivil, createEstadoCivilAdmin, deleteEstadoCivilAdmin } = require('../controllers/paciente.controller');
 //ETNIA
-const { getEtnia, createEtnia, deleteEtnia } =require('../controllers/users.controller');
+const { getEtnia, createEtniaAdmin, deleteEtniaAdmin } = require('../controllers/paciente.controller');
 //INSTRUCCION
-const { getIntruccion, createInstruccion, deleteInstruccion } =require('../controllers/users.controller');
+const { getIntruccion, createInstruccionAdmin, deleteInstruccionAdmin } = require('../controllers/paciente.controller');
 //SEGURO
-const { getSeguro, createSeguro, deleteSeguro } =require('../controllers/users.controller');
+const { getSeguro, createSeguroAdmin, deleteSeguroAdmin } = require('../controllers/paciente.controller');
 //ACUERDO
-const { getAcuerdo, createAcuerdo, deleteAcuerdo } =require('../controllers/users.controller');
+const { getAcuerdo, createAcuerdoAdmin, deleteAcuerdoAdmin } = require('../controllers/paciente.controller');
 //ZONA
-const { getZona, createZona, deleteZona } =require('../controllers/users.controller');
+const { getZona, createZonaAdmin, deleteZonaAdmin } = require('../controllers/paciente.controller');
 //TIPO AFILIADO
-const { getTipoAfiliado, createTipoAfiliado, deleteTipoAfiliado } =require('../controllers/users.controller');
+const { getTipoAfiliado, createTipoAfiliadoAdmin, deleteTipoAfiliadoAdmin } = require('../controllers/paciente.controller');
 //PACIENTE
-const { getPaciente, createPaciente, updatePaciente, deletePaciente } =require('../controllers/users.controller');
+const { getPacienteAdmin, getPacienteByDate, getPacienteByNombre, getPacienteByStatus, createPaciente, updatePaciente, deletePaciente } = require('../controllers/paciente.controller');
+//FICHA_MEDICA
+const { createFichaMedica, updateFichaMedica, deleteFichaMedica } = require('../controllers/paciente.controller');
 
 
 //TIPO DE IDENTIFICACION
-
-router.get('',getTipoIdentidad);
-router.post('',createTipoIdentidad);
-router.delete('',deleteTipoIdentidad);
+router.get('', getTipoIdentidadAdmin);
+router.get('', getTipoIdentidad);
+router.post('', createTipoIdentidadAdmin);
+router.put('', deleteTipoIdentidadAdmin);
 //ESTADO CIVIL
-router.get('',getEstadoCivil);
-router.post('',createEstadoCivil);
-router.delete('',deleteEstadoCivil);
+router.get('', getEstadoCivil);
+router.post('', createEstadoCivilAdmin);
+router.put('', deleteEstadoCivilAdmin);
 //ETNIA
-router.get('',getEtnia);
-router.post('',createEtnia);
-router.delete('',deleteEtnia);
+router.get('', getEtnia);
+router.post('', createEtniaAdmin);
+router.put('', deleteEtniaAdmin);
 //INSTRUCCION
-router.get('',getIntruccion);
-router.post('',createInstruccion);
-router.delete('',deleteInstruccion);
+router.get('', getIntruccion);
+router.post('', createInstruccionAdmin);
+router.put('', deleteInstruccionAdmin);
 //SEGURO
-router.get('',getSeguro);
-router.post('',createSeguro);
-router.delete('',deleteSeguro);
+router.get('', getSeguro);
+router.post('', createSeguroAdmin);
+router.put('', deleteSeguroAdmin);
 //ACUERDO
-router.get('',getAcuerdo);
-router.post('',createAcuerdo);
-router.delete('',deleteAcuerdo);
+router.get('', getAcuerdo);
+router.post('', createAcuerdoAdmin);
+router.put('', deleteAcuerdoAdmin);
 //ZONA
-router.get('',getZona);
-router.post('',createZona);
-router.delete('',deleteZona);
+router.get('', getZona);
+router.post('', createZonaAdmin);
+router.put('', deleteZonaAdmin);
 //TIPO AFILIADO
-router.get('',getTipoAfiliado);
-router.post('',createTipoAfiliado);
-router.delete('',deleteTipoAfiliado);
+router.get('', getTipoAfiliado);
+router.post('', createTipoAfiliadoAdmin);
+router.put('', deleteTipoAfiliadoAdmin);
 //PACIENTE
-router.get('',getPaciente);
-router.post('',createPaciente);
-router.put('',updatePaciente);
-router.delete('',deletePaciente);
+router.get('', getPacienteAdmin);
+router.get('', getPacienteByDate);
+router.get('', getPacienteByNombre);
+router.get('', getPacienteByStatus);
+router.post('', createPaciente);
+router.put('', updatePaciente);
+router.delete('', deletePaciente);
+//FICHA_MEDICA
+router.post('',createFichaMedica);
+router.put('',updateFichaMedica);
+router.put('',deleteFichaMedica);
 
 
-module.exports=router;
+module.exports = router;

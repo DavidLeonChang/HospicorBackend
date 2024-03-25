@@ -17,7 +17,7 @@ const getEstablecimientoAdmin = async (req, res) => {
         res.status(200).json(response.rows);
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const getEstablecimiento = async (req, res) => {
@@ -27,7 +27,7 @@ const getEstablecimiento = async (req, res) => {
         res.status(200).json(response.rows);
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const createEstablecimientoAdmin = async (req, res) => {
@@ -38,7 +38,7 @@ const createEstablecimientoAdmin = async (req, res) => {
         res.json({ status: 200, data: "El centro de salud ha sido registrado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "El centro de salud no pudo ser creado" });
     }
 }
 const deleteEstablecimientoAdmin = async (req, res) => {
@@ -49,7 +49,7 @@ const deleteEstablecimientoAdmin = async (req, res) => {
         res.json({ status: 200, data: "El centro de salud ha sido eliminado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al eliminar el centro de salud" });
     }
 }
 //CARGO
@@ -59,7 +59,7 @@ const getCargoAdmin = async (req, res) => {
         res.status(200).json(response.rows);
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const getCargo = async (req, res) => {
@@ -69,7 +69,7 @@ const getCargo = async (req, res) => {
         res.status(200).json(response.rows);
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const createCargoAdmin = async (req, res) => {
@@ -80,7 +80,7 @@ const createCargoAdmin = async (req, res) => {
         res.json({ status: 200, data: "El cargo ha sido registrado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "El cargo no pudo ser creado" });
     }
 }
 const deleteCargoAdmin = async (req, res) => {
@@ -91,7 +91,7 @@ const deleteCargoAdmin = async (req, res) => {
         res.json({ status: 200, data: "El cargo ha sido eliminado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al eliminar el cargo" });
     }
 }
 //SERVICIO
@@ -102,7 +102,7 @@ const getServicio = async (req, res) => {
         res.status(200).json(response.rows);
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const getServicioAdmin = async (req, res) => {
@@ -111,7 +111,7 @@ const getServicioAdmin = async (req, res) => {
         res.status(200).json(response.rows);
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const createServicioAdmin = async (req, res) => {
@@ -122,7 +122,7 @@ const createServicioAdmin = async (req, res) => {
         res.json({ status: 200, data: "El servicio ha sido registrado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "El servicio no pudo ser creado" });
     }
 }
 const deleteServicioAdmin = async (req, res) => {
@@ -133,7 +133,7 @@ const deleteServicioAdmin = async (req, res) => {
         res.json({ status: 200, data: "El servicio ha sido eliminado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al eliminar servicio" });
     }
 }
 //GENEROS
@@ -143,7 +143,7 @@ const getGeneroAdmin = async (req, res) => {
         res.status(200).json(response.rows);
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const getGenero = async (req, res) => {
@@ -153,7 +153,7 @@ const getGenero = async (req, res) => {
         res.status(200).json(response.rows);
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const createGeneroAdmin = async (req, res) => {
@@ -164,7 +164,7 @@ const createGeneroAdmin = async (req, res) => {
         res.json({ status: 200, data: "El genero ha sido registrado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "El genero no pudo ser creado" });
     }
 }
 const deleteGeneroAdmin = async (req, res) => {
@@ -175,7 +175,7 @@ const deleteGeneroAdmin = async (req, res) => {
         res.json({ status: 200, data: "El genero ha sido eliminado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al eliminar el genero" });
     }
 }
 //ROLES USUARIO
@@ -185,7 +185,7 @@ const getRolAdmin = async (req, res) => {
         res.status(200).json(response.rows);
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const getRol = async (req, res) => {
@@ -195,7 +195,7 @@ const getRol = async (req, res) => {
         res.status(200).json(response.rows);
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const createRolAdmin = async (req, res) => {
@@ -206,7 +206,7 @@ const createRolAdmin = async (req, res) => {
         res.json({ status: 200, data: "El rol ha sido registrado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "El rol no pudo ser creado" });
     }
 }
 const deleteRolAdmin = async (req, res) => {
@@ -217,7 +217,7 @@ const deleteRolAdmin = async (req, res) => {
         res.json({ status: 200, data: "El rol ha sido eliminado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al eliminar rol" });
     }
 }
 //USUARIOS
@@ -227,7 +227,7 @@ const getUsuario = async (req, res) => {
         res.status(200).json(response.rows);
     } catch (error) {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al traer data" });
     }
 }
 const createUsuarioAdmin = async () => {
@@ -238,7 +238,7 @@ const createUsuarioAdmin = async () => {
         res.json({ status: 200, data: "El usuario ha sido registrado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "El usuario no pudo ser creado" });
     }
 }
 const updateUsuario = async (req, res) => {
@@ -249,7 +249,7 @@ const updateUsuario = async (req, res) => {
         res.json({ status: 200, data: "El usuario ha sido actualizado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al actualizar el usuario" });
     }
 }
 
@@ -261,7 +261,7 @@ const deleteUsuarioAdmin = async (req, res) => {
         res.json({ status: 200, data: "El usuario ha sido eliminado" });
     } catch {
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "Error al eliminar usuario" });
     }
 }
 
@@ -277,7 +277,7 @@ const postLogin = async (req, res) => {
         }        
     }catch{
         console.log(error)
-        res.status(500).send();
+        res.json({ status: 500, data: "No es posible conectar, compruebe su coneccion a internet" });
     }
 }
 

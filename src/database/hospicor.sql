@@ -126,7 +126,7 @@ CREATE TABLE PACIENTE(
     apellido2 varchar(15),    
     edad integer,
     generoid serial,
-    fechaNacimiento date,
+    fechaNacimiento timestamp,
     lugarNacimiento varchar(20),
     estadocivilid serial,
     etniaid serial,
@@ -145,7 +145,7 @@ CREATE TABLE PACIENTE(
     seguroid serial,
     acuerdoid serial,
     tipoafiliadoid serial,
-    fechafallecimiento date,
+    fechafallecimiento timestamp,
     creadoporid varchar(20),
     editadoporid varchar(20),
     FOREIGN KEY(tipoidentificacionid) references TIPOIDENTIFICACION(id),
@@ -174,10 +174,10 @@ CREATE TABLE PROVEEDORES(
     id serial PRIMARY KEY,
     nombre varchar(100),
     nofactura integer,
-    fecha date,
+    fecha timestamp,
     cantidad integer,
     coste real,
-    fechacaducidad date,
+    fechacaducidad timestamp,
     lote varchar(20),
     registrosanitario varchar(30),
     estado varchar(15),
@@ -230,8 +230,8 @@ CREATE TABLE ITEM_INVENTARIO(
     rpis boolean,
     creadopor VARCHAR(20),
     editadopor VARCHAR(20),
-    creadofec date,
-    editadofec date,
+    creadofec timestamp,
+    editadofec timestamp,
     provedorid serial,
     FOREIGN KEY(categoriaid) references CATEGORIA_INVETARIO(id),
     FOREIGN KEY(provedorid) references PROVEEDORES(id)
@@ -260,15 +260,21 @@ CREATE TABLE FICHA_MEDICA(
     id serial PRIMARY KEY,
     datosestablecimientoid serial,
     pacienteid varchar(15),
-    fechaentrada date,
-    fechasalida date,
-    antecedentes text,    
+    fechaentrada timestamp,
+    fechasalida timestamp,
+    estado boolean,    
     FOREIGN KEY(datosestablecimientoid) references DATOSESTABLECIMIENTO(id),    
     FOREIGN KEY(pacienteid) references PACIENTE(id)
 );/** Toda actividad e insumos consumido durante el proceso medico **/
 
     /** TABLAS ADICIONALES DE INFORMACION DEL PACIENTE Y FORMULARIOS */
     /** Inicio **/
+
+CREATE TABLE ANTECEDENTES(
+    id serial PRIMARY KEY,
+    fichamedicaid serial,
+    FOREIGN KEY (fichamedicaid) references FICHA_MEDICA(id)
+)
 
 CREATE TABLE CIE10(
     id varchar(6) PRIMARY KEY,
@@ -288,7 +294,7 @@ CREATE TABLE DIAGNOSTICOCIE10(
 
 CREATE TABLE EVENTOINGRESO(
     id serial PRIMARY KEY,
-    fecha date,
+    fecha timestamp,
     condiciondellegada varchar(30),
     motivo varchar(30)
     fichamedicaid serial,
@@ -303,8 +309,8 @@ CREATE TABLE EVENTOINGRESO(
 CREATE TABLE EVOLUCIONES(
     id serial PRIMARY KEY,
     fichamedicaid serial,
-    fechainicio date,
-    fechafinal date,
+    fechainicio timestamp,
+    fechafinal timestamp,
     evoluciontexto text,
     FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );
@@ -338,7 +344,7 @@ CREATE TABLE EPICRISIS(
     diasestada integer,
     diasreposo integer,
     elaboradopor varchar(40),
-    fechaepi date,
+    fechaepi timestamp,
     userid serial,
     fichamedicaid serial,
     FOREIGN KEY(userid) references USUARIOS(id),
@@ -361,7 +367,7 @@ CREATE TABLE SOLICITUD(
 CREATE TABLE INTERCONSULTA(    
     id serial PRIMARY KEY,
     fichamedicaid serial,
-    fecha date,
+    fecha timestamp,
     duracion integer,
     cuadroclinico text,
     resumencclinico text,
@@ -414,12 +420,12 @@ CREATE TABLE REFERENCIACONTRAREFERENCIA(
     institureferencia varchar(30),
     establereferencia varchar(30),
     distritreferencia varchar(30),
-    fechareferencia date,
+    fechareferencia timestamp,
     resumencclinicocontra text,
     hallazgoscontra text,
     tratamientocontra text,
     tratamientorecomendado text,
-    fechainforme date,
+    fechainforme timestamp,
     userid serial,
     fichamedicaid serial,
     FOREIGN KEY(userid) references USUARIOS(id),
@@ -461,7 +467,7 @@ CREATE TABLE NUTRICION(
     camaid serial,
     tipoid serial,
     tipodietaid serial,
-    fecha date,
+    fecha timestamp,
     observacion text,
     FOREIGN KEY(camaid) references CAMA(id),
     FOREIGN KEY(tipoid) references TIPO(id),
