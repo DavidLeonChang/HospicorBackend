@@ -4,19 +4,19 @@ const router = Router();
 //TIPO DE IDENTIFICACION
 const { getTipoIdentidadAdmin, getTipoIdentidad, createTipoIdentidadAdmin, deleteTipoIdentidadAdmin } = require('../controllers/paciente.controller');
 //ESTADO CIVIL
-const { getEstadoCivilAdmin , getEstadoCivil, createEstadoCivilAdmin, deleteEstadoCivilAdmin } = require('../controllers/paciente.controller');
+const { getEstadoCivilAdmin, getEstadoCivil, createEstadoCivilAdmin, deleteEstadoCivilAdmin } = require('../controllers/paciente.controller');
 //ETNIA
-const { getEtniaAdmin , getEtnia, createEtniaAdmin, deleteEtniaAdmin } = require('../controllers/paciente.controller');
+const { getEtniaAdmin, getEtnia, createEtniaAdmin, deleteEtniaAdmin } = require('../controllers/paciente.controller');
 //INSTRUCCION
-const { getIntruccionAdmin,getIntruccion, createInstruccionAdmin, deleteInstruccionAdmin } = require('../controllers/paciente.controller');
+const { getIntruccionAdmin, getIntruccion, createInstruccionAdmin, deleteInstruccionAdmin } = require('../controllers/paciente.controller');
 //SEGURO
-const { getSeguroAdmin,getSeguro, createSeguroAdmin, deleteSeguroAdmin } = require('../controllers/paciente.controller');
+const { getSeguroAdmin, getSeguro, createSeguroAdmin, deleteSeguroAdmin } = require('../controllers/paciente.controller');
 //ACUERDO
-const { getAcuerdoAdmin,getAcuerdo, createAcuerdoAdmin, deleteAcuerdoAdmin } = require('../controllers/paciente.controller');
+const { getAcuerdoAdmin, getAcuerdo, createAcuerdoAdmin, deleteAcuerdoAdmin } = require('../controllers/paciente.controller');
 //ZONA
-const { getZonaAdmin,getZona, createZonaAdmin, deleteZonaAdmin } = require('../controllers/paciente.controller');
+const { getZonaAdmin, getZona, createZonaAdmin, deleteZonaAdmin } = require('../controllers/paciente.controller');
 //TIPO AFILIADO
-const { getTipoAfiliadoAdmin,getTipoAfiliado, createTipoAfiliadoAdmin, deleteTipoAfiliadoAdmin } = require('../controllers/paciente.controller');
+const { getTipoAfiliadoAdmin, getTipoAfiliado, createTipoAfiliadoAdmin, deleteTipoAfiliadoAdmin } = require('../controllers/paciente.controller');
 //PACIENTE
 const { getPacienteAdmin, getPacienteByDate, getPacienteByNombre, getPacienteByStatus, createPaciente, updatePaciente, deletePacienteAdmin } = require('../controllers/paciente.controller');
 //FICHA_MEDICA
@@ -72,7 +72,7 @@ router.post('/paciente/nuevo', createPaciente);
 router.put('/paciente/:id', updatePaciente);
 router.delete('/admin/paciente/:id', deletePacienteAdmin);
 //FICHA_MEDICA
-router.post('/fichamedica/nuevo',createFichaMedica);
-router.put('/fichamedica/:id',updateFichaMedica);
-router.put('/fichamedica/alta/:id',deleteFichaMedica);
+router.post('/fichamedica/nuevo', createFichaMedica);
+router.put('/fichamedica/:id', updateFichaMedica);
+router.put('/fichamedica/alta/:id', deleteFichaMedica);
 module.exports = router;
