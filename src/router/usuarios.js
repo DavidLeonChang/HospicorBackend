@@ -18,33 +18,33 @@ const { getUsuario, createUsuarioAdmin, updateUsuario, deleteUsuarioAdmin , post
 //DATOSESTABLECIMIENTO
 router.get('/admin/establecimiento',getEstablecimientoAdmin)
 router.get('/establecimiento',getEstablecimiento);
-router.post('/establecimiento/nuevo',createEstablecimientoAdmin);
-router.delete('/establecimiento/:id',deleteEstablecimientoAdmin);
+router.post('/admin/establecimiento/nuevo',createEstablecimientoAdmin);
+router.delete('/admin/establecimiento/:id',deleteEstablecimientoAdmin);
 //CARGO
 router.get('/admin/cargo',getCargoAdmin);
 router.get('/cargo',getCargo);
-router.post('/cargo/nuevo',createCargoAdmin);
-router.delete('/cargo/:id',deleteCargoAdmin);
+router.post('/admin/cargo/nuevo',createCargoAdmin);
+router.delete('/admin/cargo/:id',deleteCargoAdmin);
 //SERVICIO
 router.get('/admin/servicio',getServicioAdmin);
 router.get('/servicio',getServicio);
-router.post('/servicio/nuevo',createServicioAdmin);
-router.delete('/servicio/:id',deleteServicioAdmin);
+router.post('/admin/servicio/nuevo',createServicioAdmin);
+router.delete('/admin/servicio/:id',deleteServicioAdmin);
 //GENEROS
 router.get('/admin/genero',getGeneroAdmin);
 router.get('/genero',getGenero );
-router.post('/genero/nuevo',createGeneroAdmin );
-router.delete('/genero/:id',deleteGeneroAdmin);
+router.post('/admin/genero/nuevo',createGeneroAdmin );
+router.delete('/admin/genero/:id',deleteGeneroAdmin);
 //ROLES USUARIO
 router.get('/admin/rol',getRolAdmin);
 router.get('/rol',getRol);
-router.post('/rol/nuevo',createRolAdmin);
-router.delete('/rol/:id',deleteRolAdmin);
+router.post('/admin/rol/nuevo',createRolAdmin);
+router.delete('/admin/rol/:id',deleteRolAdmin);
 //USUARIOS
 router.get('/usuario',getUsuario);
-router.post('/usuario/nuevo',createUsuarioAdmin);
+router.post('/admin/usuario/nuevo',createUsuarioAdmin);
 router.put('/usuario/update/:id',updateUsuario);
-router.delete('/usuario/:id',deleteUsuarioAdmin);
+router.delete('/admin/usuario/:id',deleteUsuarioAdmin);
 router.post('/users/login',postLogin);
 
 module.exports=router;
