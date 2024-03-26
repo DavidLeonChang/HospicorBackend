@@ -439,7 +439,8 @@ CREATE TABLE REFERENCIACONTRAREFERENCIA(
 
 CREATE TABLE HABITACION(
     id serial PRIMARY KEY,
-    nombre VARCHAR(20)
+    nombre VARCHAR(20),
+    estado boolean
 );/** Seccion de la clinica **/
 
 CREATE TABLE CAMA(
@@ -454,22 +455,26 @@ CREATE TABLE CAMA(
 
 CREATE TABLE TIPO(
     id serial PRIMARY KEY,
-    descripcion VARCHAR(15)
+    descripcion VARCHAR(15),
+    estado boolean
 );/** Nombre de la comida segun el momento del dia **/
 
 CREATE TABLE TIPODIETA(
     id serial PRIMARY KEY,
-    descripcion VARCHAR(100)
+    descripcion VARCHAR(100),
+    precio real
 );/** Tipo de comida segun la dieta **/
 
 CREATE TABLE NUTRICION(
     id serial PRIMARY KEY,
-    camaid serial,
+    fichamedicaid serial,
     tipoid serial,
     tipodietaid serial,
-    fecha timestamp,
+    administrado boolean default false,
+    familiar boolean default false,
+    fecha date,
     observacion text,
-    FOREIGN KEY(camaid) references CAMA(id),
+    FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id),
     FOREIGN KEY(tipoid) references TIPO(id),
     FOREIGN KEY(tipodietaid) references TIPODIETA(id)
 );/** Inicio **/
