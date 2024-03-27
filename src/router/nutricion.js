@@ -2,40 +2,37 @@ const { Router }=require('express');
 const router=Router();
 
 //HABITACION
-const {  } =require('../controllers/nutricion.controller');
+const { getHabitacion, createHabitacionAdmin, updateHabitacionAdmin } =require('../controllers/nutricion.controller');
 //CAMA
-const {  } =require('../controllers/nutricion.controller');
+const { getCama, createCamaAdmin, updateCamaAdmin, trasladoCama } =require('../controllers/nutricion.controller');
 //TIPO
-const {  } =require('../controllers/nutricion.controller');
+const { getTipo, createTipoAdmin, updateTipoAdmin } =require('../controllers/nutricion.controller');
 //TIPODIETA
-const {  } =require('../controllers/nutricion.controller');
+const { getTipoDieta, createTipoDieta, updateTipoDieta } =require('../controllers/nutricion.controller');
 //NUTRICION
-const {  } =require('../controllers/nutricion.controller');
+const { getNutricionbyday, createNutricion, updateNutricion } =require('../controllers/nutricion.controller');
 
 //HABITACION
-router.get('',);
-router.get('',);
-router.post('',);
-router.delete('',);
+router.get('/habitacion',getHabitacion);
+router.post('/admin/habitacion/nuevo',createHabitacionAdmin);
+router.put('/admin/habitacion/:id',updateHabitacionAdmin);
 //CAMA
-router.get('',);
-router.get('',);
-router.post('',);
-router.delete('',);
+router.get('/cama',getCama);
+router.post('/admin/cama/nuevo',createCamaAdmin);
+router.put('/admin/cama/:id',updateCamaAdmin);
+router.put('/traslado/cama/:id',trasladoCama);
 //TIPO
-router.get('',);
-router.get('',);
-router.post('',);
-router.delete('',);
+router.get('/tipo',getTipo);
+router.post('/admin/tipo/nuevo',createTipoAdmin);
+router.put('/admin/tipo/:id',updateTipoAdmin);
 //TIPODIETA
-router.get('',);
-router.get('',);
-router.post('',);
-router.delete('',);
+router.get('/tipodieta',getTipoDieta);
+router.post('/admin/tipodieta/nuevo',createTipoDieta);
+router.put('/admin/tipodieta/:id',updateTipoDieta);
 //NUTRICION
-router.get('',);
-router.get('',);
-router.post('',);
-router.delete('',);
+router.get('/nutricion',getNutricionbyday);
+router.get('/nutricion/:id',getNutricionbyid);
+router.post('/nutricion/nuevo',createNutricion);
+router.put('/nutricion/update/:id',updateNutricion);
 
 module.exports = router;

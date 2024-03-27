@@ -16,35 +16,35 @@ const { getUsuario, createUsuarioAdmin, updateUsuario, deleteUsuarioAdmin, postL
 
 //Rutas
 //DATOSESTABLECIMIENTO
-router.get('/admin/establecimiento', getEstablecimientoAdmin)
+router.get('/admin/establecimiento', getEstablecimientoAdmin);
 router.get('/establecimiento', getEstablecimiento);
 router.post('/admin/establecimiento/nuevo', createEstablecimientoAdmin);
-router.delete('/admin/establecimiento/:id', deleteEstablecimientoAdmin);
+router.put('/admin/establecimiento/:id', deleteEstablecimientoAdmin);
 //CARGO
 router.get('/admin/cargo', getCargoAdmin);
 router.get('/cargo', getCargo);
 router.post('/admin/cargo/nuevo', createCargoAdmin);
-router.delete('/admin/cargo/:id', deleteCargoAdmin);
+router.put('/admin/cargo/:id', deleteCargoAdmin);
 //SERVICIO
 router.get('/admin/servicio', getServicioAdmin);
 router.get('/servicio', getServicio);
 router.post('/admin/servicio/nuevo', createServicioAdmin);
-router.delete('/admin/servicio/:id', deleteServicioAdmin);
+router.put('/admin/servicio/:id', deleteServicioAdmin);
 //GENEROS
 router.get('/admin/genero', getGeneroAdmin);
 router.get('/genero', getGenero);
 router.post('/admin/genero/nuevo', createGeneroAdmin);
-router.delete('/admin/genero/:id', deleteGeneroAdmin);
+router.put('/admin/genero/:id', deleteGeneroAdmin);
 //ROLES USUARIO
 router.get('/admin/rol', getRolAdmin);
 router.get('/rol', getRol);
 router.post('/admin/rol/nuevo', createRolAdmin);
-router.delete('/admin/rol/:id', deleteRolAdmin);
+router.put('/admin/rol/:id', deleteRolAdmin);
 //USUARIOS
 router.get('/usuario', getUsuario);
 router.post('/admin/usuario/nuevo', createUsuarioAdmin);
 router.put('/usuario/update/:id', updateUsuario);
-router.delete('/admin/usuario/:id', deleteUsuarioAdmin);
+router.put('/admin/usuario/:id', deleteUsuarioAdmin);
 router.post('/users/login', postLogin);
 
 module.exports = router;

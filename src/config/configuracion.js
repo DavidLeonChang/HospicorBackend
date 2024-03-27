@@ -150,6 +150,8 @@ const config = {
         nutricion: {
             createS: 'El plan nutricional se añadio',
             createF: 'El plan nutricional no pudo ser agregado',
+            updateS: '',
+            updateF: '',
             deleteS: 'El plan nutricional se ha actualizado',
             deleteF: 'Error al actualizar el plan nutricional'             
         },
