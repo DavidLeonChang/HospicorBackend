@@ -369,10 +369,13 @@ const getPacienteByNombre = async (req, res) => {
             switch (numla) {
                 case (1):
                     if (nombrecedula != "") {
-                        response = await pool.query(`SELECT * FROM PACIENTE WHERE PACIENTE.nombre LIKE %$1% OR 
-                                                                                  PACIENTE.nombre2 LIKE %$1% OR 
-                                                                                  PACIENTE.apellido LIKE %$1% OR 
-                                                                                  PACIENTE.apellido2 LIKE %$1%`, [arreglo[0]]);
+                        response = await pool.query(`SELECT * 
+                                                       FROM PACIENTE 
+                                                      WHERE PACIENTE.nombre LIKE %$1% OR 
+                                                            PACIENTE.nombre2 LIKE %$1% OR 
+                                                            PACIENTE.apellido LIKE %$1% OR 
+                                                            PACIENTE.apellido2 LIKE %$1%
+                                                      LIMIT 100;`, [arreglo[0]]);
                     } else {
                         res.json({ status: 200, data: "No se pudo buscar el campo esta vacio" });
                         return;
@@ -388,15 +391,15 @@ const getPacienteByNombre = async (req, res) => {
                                                                                   PACIENTE.nombre2 LIKE %$2% OR 
                                                                                   PACIENTE.apellido LIKE %$2% OR 
                                                                                   PACIENTE.apellido2 LIKE %$2%
-                                                                                  `, [arreglo[0], arreglo[1]]);
+                                                                            LIMIT 100;`, [arreglo[0], arreglo[1]]);
                     }
                     break;
                 case (3):
                     if (nombrecedula != "") {
-                        response = await pool.query(`SELECT * FROM PACIENTE WHERE PACIENTE.nombreLIKE %$1% OR 
-                                                                                  PACIENTE.nombre2LIKE %$1% OR 
-                                                                                  PACIENTE.apellidoLIKE %$1% OR 
-                                                                                  PACIENTE.apellido2LIKE %$1% UNION
+                        response = await pool.query(`SELECT * FROM PACIENTE WHERE PACIENTE.nombre LIKE %$1% OR 
+                                                                                  PACIENTE.nombre2 LIKE %$1% OR 
+                                                                                  PACIENTE.apellido LIKE %$1% OR 
+                                                                                  PACIENTE.apellido2 LIKE %$1% UNION
                                                      SELECT * FROM PACIENTE WHERE PACIENTE.nombre LIKE %$2% OR 
                                                                                   PACIENTE.nombre2 LIKE %$2% OR 
                                                                                   PACIENTE.apellido LIKE %$2% OR 
@@ -405,15 +408,15 @@ const getPacienteByNombre = async (req, res) => {
                                                                                   PACIENTE.nombre2 LIKE %$3% OR 
                                                                                   PACIENTE.apellido LIKE %$3% OR 
                                                                                   PACIENTE.apellido2 LIKE %$3%
-                                                                                  `, [arreglo[0], arreglo[1], arreglo[2]]);
+                                                                            LIMIT 100;`, [arreglo[0], arreglo[1], arreglo[2]]);
                     }
                     break;
                 case (4):
                     if (nombrecedula != "") {
-                        response = await pool.query(`SELECT * FROM PACIENTE WHERE PACIENTE.nombreLIKE %$1% OR 
-                                                                                  PACIENTE.nombre2LIKE %$1% OR 
-                                                                                  PACIENTE.apellidoLIKE %$1% OR 
-                                                                                  PACIENTE.apellido2LIKE %$1% UNION
+                        response = await pool.query(`SELECT * FROM PACIENTE WHERE PACIENTE.nombre LIKE %$1% OR 
+                                                                                  PACIENTE.nombre2 LIKE %$1% OR 
+                                                                                  PACIENTE.apellido LIKE %$1% OR 
+                                                                                  PACIENTE.apellido2 LIKE %$1% UNION
                                                      SELECT * FROM PACIENTE WHERE PACIENTE.nombre LIKE %$2% OR 
                                                                                   PACIENTE.nombre2 LIKE %$2% OR 
                                                                                   PACIENTE.apellido LIKE %$2% OR 
@@ -425,8 +428,8 @@ const getPacienteByNombre = async (req, res) => {
                                                      SELECT * FROM PACIENTE WHERE PACIENTE.nombre LIKE %$4% OR 
                                                                                   PACIENTE.nombre2 LIKE %$4% OR 
                                                                                   PACIENTE.apellido LIKE %$4% OR 
-                                                                                  PACIENTE.apellido2 LIKE %$4%;                             
-                                                                                  `, [arreglo[0], arreglo[1], arreglo[2], arreglo[3]]);
+                                                                                  PACIENTE.apellido2 LIKE %$4%                                                                                                           
+                                                                            LIMIT 100;`, [arreglo[0], arreglo[1], arreglo[2], arreglo[3]]);
                     }
                     break;
             }

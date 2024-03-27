@@ -150,21 +150,70 @@ const config = {
         nutricion: {
             createS: 'El plan nutricional se añadio',
             createF: 'El plan nutricional no pudo ser agregado',
-            updateS: '',
-            updateF: '',
+            updateS: 'El plan nutricional ha sido actualizado',
+            updateF: 'El plan nutricional no pudo ser actualizado',
             deleteS: 'El plan nutricional se ha actualizado',
             deleteF: 'Error al actualizar el plan nutricional'             
         },
 //---------------------------------------------------- Mensajes de Nutricion Fin ---------------------------------------------------------
 
 
-//---------------------------------------------------- Mensajes de  Inicio ---------------------------------
+//---------------------------------------------------- Mensajes de Inventario Inicio ---------------------------------
+        categoriainventario:{
+            createS: 'La categoria ha sido creada',
+            createF: 'La categoria no pudo ser creada',
+            deleteS: 'La categoria ha sido eliminada',
+            deleteF: 'Error al eliminar la categoria'
+        },
+        proveedor:{
+            createS: 'El proveedor ha sido creado',
+            createF: 'El proveedor no pudo ser creado',
+            deleteS: 'El proveedor ha sido eliminado',
+            deleteF: 'Error al eliminar el proveedor'
+        },
+        despacho:{
+            createS: 'El despacho ha sido creado',
+            createF: 'El despacho no pudo ser creado',
+            deleteS: 'El despacho ha sido eliminado',
+            deleteF: 'Error al eliminar el despacho'
+        },
+        itemdespacho:{
+            createS: '',
+            createF: '',
+            updateS: 'El plan nutricional ha sido actualizado',
+            updateF: 'El plan nutricional no pudo ser actualizado',
+            deleteS: '',
+            deleteF: ''
+        },
+        iteminventario:{
+            createS: '',
+            createF: '',
+            updateS: 'El plan nutricional ha sido actualizado',
+            updateF: 'El plan nutricional no pudo ser actualizado',
+            deleteS: '',
+            deleteF: ''
+        },
+        bodega:{
+            createS: '',
+            createF: '',
+            deleteS: '',
+            deleteF: ''
+        },
+        itembodega:{
+            createS: '',
+            createF: '',
+            updateS: 'El plan nutricional ha sido actualizado',
+            updateF: 'El plan nutricional no pudo ser actualizado',
+            deleteS: '',
+            deleteF: ''
+        },
         s:{
             createS: '',
             createF: '',
             deleteS: '',
             deleteF: ''
-        }
+        },
+
 
     }
 };

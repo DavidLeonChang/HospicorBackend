@@ -46,7 +46,7 @@ create table ROLES_USUARIOS(
 
 CREATE TABLE USUARIOS(
     id SERIAL PRIMARY KEY,
-    nombreusuario VARCHAR(15),
+    nombreusuario VARCHAR(20),
     cedula VARCHAR(11),
     contrasena VARCHAR(30),
     nombre1 VARCHAR(15),
@@ -167,8 +167,38 @@ CREATE TABLE PACIENTE(
 CREATE TABLE CATEGORIA_INVETARIO(
     id serial PRIMARY KEY,
     nombre VARCHAR(25),
-    abreviatura VARCHAR(3)
+    abreviatura VARCHAR(3),
+    estado boolean default true
 );/** Tipo de categoria de un item del sistema **/
+
+CREATE TABLE ESTADOINVENTARIO(
+    id serial PRIMARY KEY,
+    nombre varchar(20),
+    estado boolean default true
+);/** Estado de las transferencias, despachos **/
+
+CREATE TABLE TRANSFERENCIA(
+    id serial PRIMARY KEY,
+    fecharegistro timestamp,
+    usuariocrea varchar(15),
+    usuariorecibe varchar(15),
+    inbodegaid serial,
+    outbodegaid serial,
+    estado serial,
+    observacion varchar(50),
+    FOREIGN KEY(inbodegaid) references BODEGA(id),
+    FOREIGN KEY(outbodegaid) references BODEGA(id),
+    FOREIGN KEY(estado) references ESTADOINVENTARIO(id)
+);/** Registro de transferencia entre bodegas y subbodegas **/
+
+CREATE TABLE ITEM_TRANSFERENCIA(
+    id serial PRIMARY KEY,
+    transferenciaid serial,
+    itemid serial,
+    estado boolean default true,
+    FOREIGN KEY(transferenciaid) references TRANSFERENCIA(id),
+    FOREIGN KEY(itemid) references ITEM_INVENTARIO(id)
+);/** Registro de items de transferencia entre bodegas y subbodegas **/
 
 CREATE TABLE PROVEEDORES(
     id serial PRIMARY KEY,
@@ -177,15 +207,19 @@ CREATE TABLE PROVEEDORES(
     fecha timestamp,
     cantidad integer,
     coste real,
-    fechacaducidad timestamp,
+    fechacaducidad date,
     lote varchar(20),
     registrosanitario varchar(30),
     estado varchar(15),
+    eliminado boolean default false
 );/** Proveedores de un item del sistema **/
 
 CREATE TABLE DESPACHO(
     id serial PRIMARY KEY,
     fichamedicaid serial,
+    estado serial,
+    numItem integer,    
+    FOREIGN KEY(estado) references ESTADOINVENTARIO(id)
     FOREIGN KEY(fichamedicaid) references FICHA_MEDICA(id)
 );/** Lista de item a despachar **/
 
@@ -194,6 +228,7 @@ CREATE TABLE DESPACHOITEM(
     despachoid serial,
     itemid serial,
     cantidad integer,
+    estado boolean default true,
     FOREIGN KEY(despachoid) references DESPACHO(id),
     FOREIGN KEY(itemid) references ITEM_INVENTARIO(id)
 );/** Referencia de la lista de item a despachar **/
@@ -239,7 +274,9 @@ CREATE TABLE ITEM_INVENTARIO(
 
 CREATE TABLE BODEGA(
     id serial PRIMARY KEY,
-    nombre VARCHAR(20)
+    nombre VARCHAR(20),
+    super boolean default false,
+    estado boolean default true
 );/** Lugar de almacenamiento del item del sistema **/
 
 CREATE TABLE ITEM_BODEGA(
@@ -250,6 +287,35 @@ CREATE TABLE ITEM_BODEGA(
     FOREIGN KEY(bodegaid) references BODEGA(id)
     FOREIGN KEY(itemid) references ITEM_INVENTARIO(id)
 );/** Referencia de la cantidad de items que hay en una bodega especifica **/
+
+CREATE TABLE AREA(
+    id serial PRIMARY KEY,
+    nombre varchar(25),
+    estado boolean default true
+);
+
+CREATE TABLE CONSUMO_INTERNO(
+    id serial PRIMARY KEY,
+    fechasol timestamp,
+    usersol varchar(20),
+    usernombre varchar(60),
+    bodegaid serial,
+    estado serial,
+    fechades timestamp,
+    userdes varchar(20),
+    
+);
+
+CREATE TABLE ITEM_CONSUMO_INTERNO(
+    id serial PRIMARY KEY,
+    consumoid,
+    itemid,
+    cantidad
+);
+
+CREATE TABLE REGULACION(
+    id serial PRIMARY KEY,
+);
 
 /** Fin **/
 
